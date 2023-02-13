@@ -1,0 +1,22 @@
+service: gdsc-api
+frameworkVersion: '3'
+
+plugins:
+  - serverless-offline
+
+package:
+  patterns:
+    - "!./**"
+    - "dist/**"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: ap-south-1
+  stage: dev
+
+functions:
+  api:
+    handler: dist/main.handler
+    events:
+      - httpApi: '*'
