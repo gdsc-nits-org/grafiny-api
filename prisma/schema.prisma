@@ -27,6 +27,9 @@ model Profile {
   uploadedItems Items[]
   institution Institution @relation(fields: [instituteId],references: [id])
   instituteId String @db.ObjectId
+  bookmarkedCourses String[]
+  likedCourses String[]
+  dislikedCourses String[]
   year YEAR 
 
   @@unique([scholarId,instituteId])
@@ -35,8 +38,32 @@ model Profile {
 model Institution {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   name String @unique
-  departments String[]
+  departments Department[]
   profile Profile[]
+}
+
+model Department {
+  id String @id @default(auto()) @map("_id") @db.ObjectId //Incomplete Model
+  name String 
+  institution Institution @relation(fields: [instituteID], references: [id])
+  instituteID String @db.ObjectId
+  courses Course[]
+}
+
+model Course {
+  id String @id @default(auto()) @map("_id") @db.ObjectId //Incomplete
+  name String
+  department Department @relation(fields: [departmentId], references: [id])
+  departmentId String @db.ObjectId
+  topic Topic[]
+}
+
+model Topic {
+  id String @id @default(auto()) @map("_id") @db.ObjectId //Incomplete
+  name String
+  department Course @relation(fields: [courseId], references: [id])
+  courseId String @db.ObjectId
+  items Items[]
 }
 
 model Items {
@@ -44,9 +71,17 @@ model Items {
   name String
   itemLink String @unique
   uploadedAt DateTime @default(now())
+  modifiedAt DateTime @updatedAt()
   profile Profile @relation(fields: [profileId],references: [id])
   profileId String @db.ObjectId
+  topic Topic @relation(fields: [topicId], references: [id])
+  topicId String @db.ObjectId
+  likedBy String[]
+  dislikedBy String[]
+  bookmarks String[] 
 }
+
+
 
 enum YEAR {
   FIRST

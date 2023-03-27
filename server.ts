@@ -26,7 +26,7 @@ app
     cookieSession({
       name: "session",
       keys: [process.env.COOKIE_SECRET ?? "mysessionkey"],
-      maxAge: 2 * 24 * 60 * 60 * 1000,
+      maxAge: 3 * 24 * 60 * 60 * 1000,
       httpOnly: true,
       secure: process.env.NODE_ENV === "prod",
     })
