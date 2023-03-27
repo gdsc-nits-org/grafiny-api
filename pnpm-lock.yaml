@@ -20,11 +20,12 @@ specifiers:
   esbuild: ^0.17.4
   eslint: ^8.32.0
   express: ^4.18.2
+  express-validator: ^6.15.0
   helmet: ^6.0.1
   lint-staged: ^13.1.0
   morgan: ^1.10.0
   nodemon: ^2.0.20
-  passport: ^0.6.0
+  passport: '0.5'
   passport-local: ^1.0.0
   prettier: ^2.8.3
   prisma: ^4.9.0
@@ -42,9 +43,10 @@ dependencies:
   cookie-session: 2.0.0
   cors: 2.8.5
   express: 4.18.2
+  express-validator: 6.15.0
   helmet: 6.0.1
   morgan: 1.10.0
-  passport: 0.6.0
+  passport: 0.5.3
   passport-local: 1.0.0
   serverless-http: 3.1.1
 
@@ -3104,6 +3106,14 @@ packages:
       strip-final-newline: 3.0.0
     dev: true
 
+  /express-validator/6.15.0:
+    resolution: {integrity: sha512-r05VYoBL3i2pswuehoFSy+uM8NBuVaY7avp5qrYjQBDzagx2Z5A77FZqPT8/gNLF3HopWkIzaTFaC4JysWXLqg==}
+    engines: {node: '>= 8.0.0'}
+    dependencies:
+      lodash: 4.17.21
+      validator: 13.9.0
+    dev: false
+
   /express/4.18.2:
     resolution: {integrity: sha512-5/PsL6iGPdfQ/lKM1UuielYgv3BUoJfz1aUwU9vHZ+J7gyvwdQXFEBIEIaxeGf0GIcreATNyBExtalisDbuMqQ==}
     engines: {node: '>= 0.10.0'}
@@ -4226,7 +4236,6 @@ packages:
 
   /lodash/4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
-    dev: true
 
   /log-node/8.0.3_log@6.3.1:
     resolution: {integrity: sha512-1UBwzgYiCIDFs8A0rM2QdBFo8Wd8UQ0HrSTu/MNI+/2zN3NoHRj2fhplurAyuxTYUXu3Oohugq1jAn5s05u1MQ==}
@@ -4825,13 +4834,12 @@ packages:
     engines: {node: '>= 0.4.0'}
     dev: false
 
-  /passport/0.6.0:
-    resolution: {integrity: sha512-0fe+p3ZnrWRW74fe8+SvCyf4a3Pb2/h7gFkQ8yTJpAO50gDzlfjZUZTO1k5Eg9kUct22OxHLqDZoKUWRHOh9ug==}
+  /passport/0.5.3:
+    resolution: {integrity: sha512-gGc+70h4gGdBWNsR3FuV3byLDY6KBTJAIExGFXTpQaYfbbcHCBlRRKx7RBQSpqEqc5Hh2qVzRs7ssvSfOpkUEA==}
     engines: {node: '>= 0.4.0'}
     dependencies:
       passport-strategy: 1.0.0
       pause: 0.0.1
-      utils-merge: 1.0.1
     dev: false
 
   /path-exists/4.0.0:
@@ -5980,6 +5988,11 @@ packages:
     dependencies:
       builtins: 1.0.3
     dev: true
+
+  /validator/13.9.0:
+    resolution: {integrity: sha512-B+dGG8U3fdtM0/aNK4/X8CXq/EcxU2WPrPEkJGslb47qyHsxmbggTWK0yEA4qnYVNF+nxNlN88o14hIcPmSIEA==}
+    engines: {node: '>= 0.10'}
+    dev: false
 
   /vary/1.1.2:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
