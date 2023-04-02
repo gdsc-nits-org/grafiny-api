@@ -23,13 +23,16 @@ model Profile {
   user User @relation(fields: [userId], references: [id])
   userId String @unique @db.ObjectId
   scholarId Int 
-  profilePic String
-  uploadedItems Items[]
+  profilePic String @default("")
+  uploadedItems Items[] @relation("uploadeditems")
   institution Institution @relation(fields: [instituteId],references: [id])
   instituteId String @db.ObjectId
-  bookmarkedCourses String[]
-  likedCourses String[]
-  dislikedCourses String[]
+  bookmarkedItems Items[] @relation("bookmarkeditems",fields: [bookmarkedItemsIds],references: [id])
+  bookmarkedItemsIds String[] @db.ObjectId
+  likedItems Items[] @relation("likeditems", fields: [likedItemIds],references: [id])
+  likedItemIds String[] @db.ObjectId
+  dislikedItems Items[] @relation("dislikeditems", fields: [dislikedItemIds],references: [id])
+  dislikedItemIds String[] @db.ObjectId
   year YEAR 
 
   @@unique([scholarId,instituteId])
@@ -72,13 +75,17 @@ model Items {
   itemLink String @unique
   uploadedAt DateTime @default(now())
   modifiedAt DateTime @updatedAt()
-  profile Profile @relation(fields: [profileId],references: [id])
+  profile Profile @relation("uploadeditems",fields: [profileId],references: [id])
   profileId String @db.ObjectId
   topic Topic @relation(fields: [topicId], references: [id])
   topicId String @db.ObjectId
-  likedBy String[]
-  dislikedBy String[]
-  bookmarks String[] 
+  bookmarkedBy Profile[] @relation("bookmarkeditems",fields: [bookmarkedByIds],references: [id])
+  bookmarkedByIds String[] @db.ObjectId
+  likedBy Profile[] @relation("likeditems", fields: [likedByIds],references: [id])
+  likedByIds String[] @db.ObjectId
+  dislikedBy Profile[] @relation("dislikeditems", fields: [dislikedByIds],references: [id])
+  dislikedByIds String[] @db.ObjectId
+  
 }
 
 
