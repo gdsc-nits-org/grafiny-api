@@ -2,9 +2,10 @@ import { User } from "@prisma/client";
 
 const serialiseUserFunction = (
   user: User,
-  done: (err: any, email?: string) => void
+  done: (err: any, userobj?: User) => void
 ) => {
-  done(null, user.email);
+  user.password = "";
+  done(null, user);
 };
 
 export default serialiseUserFunction;
