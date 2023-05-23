@@ -11,7 +11,7 @@ import * as Routers from "./src/routers";
 import * as Constants from "./src/globals/constants";
 import * as Utils from "./src/utils";
 import { authRouter } from "./src/routers";
-
+import { handleUpload } from "src/controllers/upload/upload";
 const app = express();
 
 // Middlewares
@@ -42,6 +42,7 @@ passport.deserializeUser(Utils.Auth.passport.deserialiseUserFunction);
 // Routers
 app.use(`${Constants.System.ROOT}/`, Routers.Health);
 app.use(`${Constants.System.ROOT}/auth`, authRouter);
+app.post(`${Constants.System.ROOT}/upload`, handleUpload);
 
 // Error Handlers
 app.use(Middlewares.Error.errorHandler);
