@@ -5,7 +5,7 @@ const getAllInstitute = async () => {
     const institutes = await prisma.institution.findMany();
     return institutes;
   } catch (err) {
-    return undefined;
+    return null;
   }
 };
 

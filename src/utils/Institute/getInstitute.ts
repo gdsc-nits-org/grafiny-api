@@ -10,7 +10,7 @@ const getInstitute = async (name: string) => {
 
     return institute;
   } catch (err) {
-    return undefined;
+    return null;
   }
 };
 

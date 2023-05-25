@@ -48,7 +48,7 @@ model Institution {
 model Department {
   id String @id @default(auto()) @map("_id") @db.ObjectId //Incomplete Model
   name String 
-  institution Institution @relation(fields: [instituteID], references: [id])
+  institution Institution @relation(fields: [instituteID], references: [id], onDelete: Cascade) 
   instituteID String @db.ObjectId
   courses Course[]
 }
@@ -56,7 +56,7 @@ model Department {
 model Course {
   id String @id @default(auto()) @map("_id") @db.ObjectId //Incomplete
   name String
-  department Department @relation(fields: [departmentId], references: [id])
+  department Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
   departmentId String @db.ObjectId
   topic Topic[]
 }
@@ -64,7 +64,7 @@ model Course {
 model Topic {
   id String @id @default(auto()) @map("_id") @db.ObjectId //Incomplete
   name String
-  department Course @relation(fields: [courseId], references: [id])
+  department Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
   courseId String @db.ObjectId
   items Items[]
 }
@@ -75,9 +75,9 @@ model Items {
   itemLink String @unique
   uploadedAt DateTime @default(now())
   modifiedAt DateTime @updatedAt()
-  profile Profile @relation("uploadeditems",fields: [profileId],references: [id])
+  profile Profile @relation("uploadeditems",fields: [profileId],references: [id], onDelete: NoAction)
   profileId String @db.ObjectId
-  topic Topic @relation(fields: [topicId], references: [id])
+  topic Topic @relation(fields: [topicId], references: [id], onDelete: Cascade)
   topicId String @db.ObjectId
   bookmarkedBy Profile[] @relation("bookmarkeditems",fields: [bookmarkedByIds],references: [id])
   bookmarkedByIds String[] @db.ObjectId
