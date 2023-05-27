@@ -10,7 +10,8 @@ const signUp: Interfaces.Controllers.Async = async (req, res, next) => {
       Utils.Response.success({
         id: user.id,
         email: user.email,
-        password: user.password,
+        password: null,
+        isAdmin: user.isAdmin,
       })
     );
   } catch (err) {

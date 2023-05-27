@@ -7,6 +7,7 @@ declare global {
       name: string;
       email: string;
       password: string;
+      isAdmin?: number;
     }
     export interface Request {
       session?: any;

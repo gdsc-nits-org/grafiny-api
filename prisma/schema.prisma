@@ -11,85 +11,82 @@ datasource db {
 }
 
 model User {
-  id  String @id @default(auto()) @map("_id") @db.ObjectId
-  name String 
-  email String @unique
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  name     String
+  email    String   @unique
   password String
-  isAdmin Boolean @default(false)
-  profile Profile?
+  isAdmin  Int      @default(0)
+  profile  Profile?
 }
 
 model Profile {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  user User @relation(fields: [userId], references: [id])
-  userId String @unique @db.ObjectId
-  scholarId Int 
-  profilePic String @default("")
-  uploadedItems Items[] @relation("uploadeditems")
-  institution Institution @relation(fields: [instituteId],references: [id])
-  instituteId String @db.ObjectId
-  bookmarkedItems Items[] @relation("bookmarkeditems",fields: [bookmarkedItemsIds],references: [id])
-  bookmarkedItemsIds String[] @db.ObjectId
-  likedItems Items[] @relation("likeditems", fields: [likedItemIds],references: [id])
-  likedItemIds String[] @db.ObjectId
-  dislikedItems Items[] @relation("dislikeditems", fields: [dislikedItemIds],references: [id])
-  dislikedItemIds String[] @db.ObjectId
-  year YEAR 
+  id                 String      @id @default(auto()) @map("_id") @db.ObjectId
+  user               User        @relation(fields: [userId], references: [id])
+  userId             String      @unique @db.ObjectId
+  scholarId          Int
+  profilePic         String      @default("")
+  uploadedItems      Items[]     @relation("uploadeditems")
+  institution        Institution @relation(fields: [instituteId], references: [id])
+  instituteId        String      @db.ObjectId
+  bookmarkedItems    Items[]     @relation("bookmarkeditems", fields: [bookmarkedItemsIds], references: [id])
+  bookmarkedItemsIds String[]    @db.ObjectId
+  likedItems         Items[]     @relation("likeditems", fields: [likedItemIds], references: [id])
+  likedItemIds       String[]    @db.ObjectId
+  dislikedItems      Items[]     @relation("dislikeditems", fields: [dislikedItemIds], references: [id])
+  dislikedItemIds    String[]    @db.ObjectId
+  year               YEAR
 
-  @@unique([scholarId,instituteId])
+  @@unique([scholarId, instituteId])
 }
 
 model Institution {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  name String @unique
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  name        String       @unique
   departments Department[]
-  profile Profile[]
+  profile     Profile[]
 }
 
 model Department {
-  id String @id @default(auto()) @map("_id") @db.ObjectId //Incomplete Model
-  name String 
-  institution Institution @relation(fields: [instituteID], references: [id], onDelete: Cascade) 
-  instituteID String @db.ObjectId
-  courses Course[]
+  id          String      @id @default(auto()) @map("_id") @db.ObjectId //Incomplete Model
+  name        String
+  institution Institution @relation(fields: [instituteID], references: [id], onDelete: Cascade)
+  instituteID String      @db.ObjectId
+  courses     Course[]
 }
 
 model Course {
-  id String @id @default(auto()) @map("_id") @db.ObjectId //Incomplete
-  name String 
-  department Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
-  departmentId String @db.ObjectId
-  topic Topic[]
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId //Incomplete
+  name         String
+  department   Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+  departmentId String     @db.ObjectId
+  topic        Topic[]
 }
 
 model Topic {
-  id String @id @default(auto()) @map("_id") @db.ObjectId //Incomplete
-  name String
-  department Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  courseId String @db.ObjectId
-  items Items[]
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId //Incomplete
+  name       String
+  department Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  courseId   String  @db.ObjectId
+  items      Items[]
 }
 
 model Items {
-  id String @id @default(auto()) @map("_id") @db.ObjectId //Incomplete Model
-  name String
-  itemLink String @unique
-  uploadedAt DateTime @default(now())
-  modifiedAt DateTime @updatedAt()
-  profile Profile @relation("uploadeditems",fields: [profileId],references: [id], onDelete: NoAction)
-  profileId String @db.ObjectId
-  topic Topic @relation(fields: [topicId], references: [id], onDelete: Cascade)
-  topicId String @db.ObjectId
-  bookmarkedBy Profile[] @relation("bookmarkeditems",fields: [bookmarkedByIds],references: [id])
-  bookmarkedByIds String[] @db.ObjectId
-  likedBy Profile[] @relation("likeditems", fields: [likedByIds],references: [id])
-  likedByIds String[] @db.ObjectId
-  dislikedBy Profile[] @relation("dislikeditems", fields: [dislikedByIds],references: [id])
-  dislikedByIds String[] @db.ObjectId
-  
+  id              String    @id @default(auto()) @map("_id") @db.ObjectId //Incomplete Model
+  name            String
+  itemLink        String    @unique
+  uploadedAt      DateTime  @default(now())
+  modifiedAt      DateTime  @updatedAt()
+  profile         Profile   @relation("uploadeditems", fields: [profileId], references: [id], onDelete: NoAction)
+  profileId       String    @db.ObjectId
+  topic           Topic     @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  topicId         String    @db.ObjectId
+  bookmarkedBy    Profile[] @relation("bookmarkeditems", fields: [bookmarkedByIds], references: [id])
+  bookmarkedByIds String[]  @db.ObjectId
+  likedBy         Profile[] @relation("likeditems", fields: [likedByIds], references: [id])
+  likedByIds      String[]  @db.ObjectId
+  dislikedBy      Profile[] @relation("dislikeditems", fields: [dislikedByIds], references: [id])
+  dislikedByIds   String[]  @db.ObjectId
 }
-
-
 
 enum YEAR {
   FIRST

@@ -1,11 +1,11 @@
-import { User, YEAR, Profile, Institution } from "@prisma/client";
+import { User, YEAR, Profile } from "@prisma/client";
 import prisma from "../prisma";
 
 const createProfile = async (
   scholarId: number,
   year: YEAR,
   user: User,
-  institute: Institution,
+  instituteId: string,
   profilePic: string
 ) => {
   const profile: Profile = await prisma.profile.create({
@@ -20,7 +20,7 @@ const createProfile = async (
       },
       institution: {
         connect: {
-          id: institute.id,
+          id: instituteId,
         },
       },
     },
