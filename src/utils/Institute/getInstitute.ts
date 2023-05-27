@@ -4,7 +4,9 @@ const getInstitute = async (name: string) => {
   try {
     const institute = await prisma.institution.findFirst({
       where: {
-        name: name.toUpperCase(),
+        name: {
+          contains: name.toUpperCase(),
+        },
       },
     });
 
