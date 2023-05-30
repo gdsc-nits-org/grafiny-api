@@ -3,9 +3,9 @@ import * as Utils from "../../utils/index";
 
 const createCourse: Interfaces.Controllers.Async = async (req, res, next) => {
   try {
-    const data: Interfaces.Course = req.body;
+    const data: Interfaces.CourseAndTopic = req.body;
     const name: string = data.name;
-    const departmentId: string = req.body.instituteName;
+    const departmentId: string = req.body.departmentId;
 
     if (!name || !departmentId) {
       throw new Error("Please Provide department id and course name");

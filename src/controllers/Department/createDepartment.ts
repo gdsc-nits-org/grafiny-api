@@ -12,7 +12,7 @@ const createDepartment: Interfaces.Controllers.Async = async (
     const instituteName: string = req.body.instituteName;
 
     if (!name || !instituteName) {
-      throw new Error("Please Provide department and insttitute name");
+      throw new Error("Please Provide department and institute name");
     }
     const department = await Utils.Department.createDepartment(
       name,

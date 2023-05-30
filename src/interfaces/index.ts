@@ -4,6 +4,14 @@ import * as JSON from "./json";
 import * as Health from "./health";
 import User from "./user";
 import Department from "./department";
-import Course from "./course";
+import CourseAndTopic from "./course";
 
-export { Controllers, Middlewares, JSON, Health, User, Department, Course };
+export {
+  Controllers,
+  Middlewares,
+  JSON,
+  Health,
+  User,
+  Department,
+  CourseAndTopic,
+};

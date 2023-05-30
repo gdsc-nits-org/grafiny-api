@@ -1,7 +1,11 @@
 import * as Interfaces from "../../interfaces/index";
 import * as Utils from "../../utils/index";
 
-const createInstitue: Interfaces.Controllers.Async = async (req, res, next) => {
+const createInstitute: Interfaces.Controllers.Async = async (
+  req,
+  res,
+  next
+) => {
   const data: string = req.body;
   try {
     const institute = await Utils.Institute.createInstitute(data);
@@ -19,4 +23,4 @@ const createInstitue: Interfaces.Controllers.Async = async (req, res, next) => {
   }
 };
 
-export default createInstitue;
+export default createInstitute;

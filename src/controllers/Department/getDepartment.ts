@@ -1,11 +1,7 @@
 import * as Interfaces from "../../interfaces/index";
 import * as Utils from "../../utils/index";
 
-const searchDepartment: Interfaces.Controllers.Async = async (
-  req,
-  res,
-  next
-) => {
+const getDepartment: Interfaces.Controllers.Async = async (req, res, next) => {
   try {
     const departmentId = req.query.id as string;
     if (!departmentId) {
@@ -25,4 +21,4 @@ const searchDepartment: Interfaces.Controllers.Async = async (
   }
 };
 
-export default searchDepartment;
+export default getDepartment;

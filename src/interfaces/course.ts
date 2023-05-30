@@ -1,6 +1,6 @@
-interface Course {
+interface CourseAndTopic {
   name: string;
   id: string;
 }
 
-export default Course;
+export default CourseAndTopic;

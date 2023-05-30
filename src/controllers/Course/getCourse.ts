@@ -1,7 +1,7 @@
 import * as Interfaces from "../../interfaces/index";
 import * as Utils from "../../utils/index";
 
-const searchCourse: Interfaces.Controllers.Async = async (req, res, next) => {
+const getCourse: Interfaces.Controllers.Async = async (req, res, next) => {
   try {
     const courseId = req.query.id as string;
     if (!courseId) {
@@ -21,4 +21,4 @@ const searchCourse: Interfaces.Controllers.Async = async (req, res, next) => {
   }
 };
 
-export default searchCourse;
+export default getCourse;
