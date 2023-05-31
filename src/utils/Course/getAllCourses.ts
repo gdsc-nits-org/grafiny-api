@@ -16,6 +16,9 @@ const getAllCourses = async (id: string) => {
       where: {
         departmentId: department.id,
       },
+      include: {
+        topic: true,
+      },
     });
 
     return courses;

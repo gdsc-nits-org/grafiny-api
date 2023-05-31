@@ -8,6 +8,9 @@ const getInstitute = async (name: string) => {
           contains: name.toUpperCase(),
         },
       },
+      include: {
+        departments: true,
+      },
     });
 
     return institute;

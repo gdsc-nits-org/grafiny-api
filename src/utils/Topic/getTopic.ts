@@ -6,6 +6,9 @@ const getTopic = async (id: string) => {
       where: {
         id: id,
       },
+      include: {
+        items: true,
+      },
     });
 
     return topic;

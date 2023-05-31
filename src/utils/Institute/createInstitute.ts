@@ -7,9 +7,9 @@ const createInstitute = async (name: string) => {
         name: name.toUpperCase(),
       },
     });
-
     return institute;
   } catch (err) {
+    console.log(err);
     return null;
   }
 };

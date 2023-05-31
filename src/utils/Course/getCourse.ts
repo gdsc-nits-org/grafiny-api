@@ -6,6 +6,9 @@ const getCourse = async (id: string) => {
       where: {
         id: id,
       },
+      include: {
+        topic: true,
+      },
     });
 
     return course;

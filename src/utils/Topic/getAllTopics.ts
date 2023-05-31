@@ -16,6 +16,9 @@ const getAllTopics = async (id: string) => {
       where: {
         courseId: course.id,
       },
+      include: {
+        items: true,
+      },
     });
 
     return topics;

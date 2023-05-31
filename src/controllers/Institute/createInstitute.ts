@@ -6,7 +6,7 @@ const createInstitute: Interfaces.Controllers.Async = async (
   res,
   next
 ) => {
-  const data: string = req.body;
+  const data: string = req.body.name;
   try {
     const institute = await Utils.Institute.createInstitute(data);
     if (institute === null) {

@@ -10,7 +10,13 @@ import * as Middlewares from "./src/middlewares";
 import * as Routers from "./src/routers";
 import * as Constants from "./src/globals/constants";
 import * as Utils from "./src/utils";
-import { authRouter } from "./src/routers";
+import {
+  authRouter,
+  instituteRouter,
+  departmentRouter,
+  courseRouter,
+  topicRouter,
+} from "./src/routers";
 
 const app = express();
 
@@ -42,6 +48,10 @@ passport.deserializeUser(Utils.Auth.passport.deserialiseUserFunction);
 // Routers
 app.use(`${Constants.System.ROOT}/`, Routers.Health);
 app.use(`${Constants.System.ROOT}/auth`, authRouter);
+app.use(`${Constants.System.ROOT}/institute`, instituteRouter);
+app.use(`${Constants.System.ROOT}/department`, departmentRouter);
+app.use(`${Constants.System.ROOT}/course`, courseRouter);
+app.use(`${Constants.System.ROOT}/topic`, topicRouter);
 
 // Error Handlers
 app.use(Middlewares.Error.errorHandler);
