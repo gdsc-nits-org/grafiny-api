@@ -1,7 +1,7 @@
 import * as Utils from "../utils/response";
 
 const checkAdmin = async (req: any, _res: any, next: any) => {
-  if (req.user.status == 1) {
+  if (req.user.status >= 1) {
     return next();
   }
 
