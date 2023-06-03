@@ -11,7 +11,6 @@ const passportStrategyCallback = async (
   done: Done
 ) => {
   try {
-    console.log(email, password, "yyyyyyyy");
     const user = await login(email, password);
     if (user) {
       return done(null, user);
