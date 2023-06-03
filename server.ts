@@ -22,7 +22,12 @@ const app = express();
 
 // Middlewares
 app
-  .use(cors())
+  .use(
+    cors({
+      origin: ["http://127.0.0.1:3000"],
+      credentials: true,
+    })
+  )
   .use(helmet())
   .use(morgan("dev"))
   .use(express.json())
@@ -31,7 +36,8 @@ app
   .use(
     cookieSession({
       name: "session",
-      keys: [process.env.COOKIE_SECRET ?? "mysessionkey"],
+      keys: ["graffinykey"],
+      sameSite: "none",
       maxAge: 3 * 24 * 60 * 60 * 1000,
       httpOnly: true,
       secure: process.env.NODE_ENV === "prod",

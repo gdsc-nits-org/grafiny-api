@@ -1,13 +1,17 @@
 import { Done } from "./strategy";
-import prisma from "src/utils/prisma";
+//import prisma from "src/utils/prisma";
+import { User } from "@prisma/client";
 
-const deserialiseUserFunction = async (email: string, done: Done) => {
+const deserialiseUserFunction = async (user: User, done: Done) => {
   try {
-    const user = await prisma.user.findFirst({
+    //console.log(email);
+    /*  const user = await prisma.user.findFirst({
       where: {
         email: email,
       },
     });
+    */
+    console.log(user, "xxxxxxxx");
 
     if (user) {
       done(null, user);
