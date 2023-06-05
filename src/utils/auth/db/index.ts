@@ -1,4 +1,5 @@
 import checkEmail from "./checkEmail";
 import createUser from "./createUser";
+import { createAdminUser, createSuperAdminUser } from "./createAdminUser";
 
-export { checkEmail, createUser };
+export { checkEmail, createUser, createAdminUser, createSuperAdminUser };
