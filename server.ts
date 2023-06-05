@@ -10,13 +10,18 @@ import * as Middlewares from "./src/middlewares";
 import * as Routers from "./src/routers";
 import * as Constants from "./src/globals/constants";
 import * as Utils from "./src/utils";
-import { authRouter } from "./src/routers";
+import { authRouter, instituteRouter } from "./src/routers";
 
 const app = express();
 
 // Middlewares
 app
-  .use(cors())
+  .use(
+    cors({
+      origin: ["http://127.0.0.1:3000"],
+      credentials: true,
+    })
+  )
   .use(helmet())
   .use(morgan("dev"))
   .use(express.json())
@@ -25,10 +30,11 @@ app
   .use(
     cookieSession({
       name: "session",
-      keys: [process.env.COOKIE_SECRET ?? "mysessionkey"],
+      keys: ["graffinykey"],
+      sameSite: "none",
       maxAge: 3 * 24 * 60 * 60 * 1000,
       httpOnly: true,
-      secure: process.env.NODE_ENV === "prod",
+      secure: true,
     })
   )
   .use(passport.initialize())
@@ -42,6 +48,7 @@ passport.deserializeUser(Utils.Auth.passport.deserialiseUserFunction);
 // Routers
 app.use(`${Constants.System.ROOT}/`, Routers.Health);
 app.use(`${Constants.System.ROOT}/auth`, authRouter);
+app.use(`${Constants.System.ROOT}/institute`, instituteRouter);
 
 // Error Handlers
 app.use(Middlewares.Error.errorHandler);
