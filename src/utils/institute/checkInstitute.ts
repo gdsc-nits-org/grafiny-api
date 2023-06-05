@@ -2,13 +2,13 @@ import { CustomValidator } from "express-validator";
 import prisma from "src/utils/prisma";
 
 const checkInstitute: CustomValidator = async (name: string) => {
-  const user = await prisma.user.findFirst({
+  const institute = await prisma.institution.findFirst({
     where: {
-      name: name.toUpperCase(),
+      name: name,
     },
   });
 
-  if (user) {
+  if (institute) {
     throw new Error("Institute With This Name Already Exists");
   }
 };
