@@ -42,7 +42,7 @@ app
 
 //passport
 passport.use(Utils.Auth.passport.passportLocalStrategy);
-passport.serializeUser(Utils.Auth.passport.serialiseUserFunction as any);
+passport.serializeUser(Utils.Auth.passport.serialiseUserFunction);
 passport.deserializeUser(Utils.Auth.passport.deserialiseUserFunction);
 
 // Routers
