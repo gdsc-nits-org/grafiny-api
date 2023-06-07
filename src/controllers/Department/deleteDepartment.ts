@@ -15,10 +15,6 @@ const deleteDepartment: Interfaces.Controllers.Async = async (
       departmentId
     );
 
-    if (deletedDepartment === null) {
-      throw new Error("Department Could not be deleted");
-    }
-
     return res.json(
       Utils.Response.success({
         msg: deletedDepartment,

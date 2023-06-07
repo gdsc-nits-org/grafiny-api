@@ -18,7 +18,7 @@ const app = express();
 app
   .use(
     cors({
-      origin: ["http://127.0.0.1:3000"],
+      origin: "*",
       credentials: true,
     })
   )
@@ -34,7 +34,7 @@ app
       sameSite: "none",
       maxAge: 3 * 24 * 60 * 60 * 1000,
       httpOnly: true,
-      secure: true,
+      secure: process.env.NODE_ENV == "prod",
     })
   )
   .use(passport.initialize())

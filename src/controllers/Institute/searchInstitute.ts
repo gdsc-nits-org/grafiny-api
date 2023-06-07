@@ -12,9 +12,7 @@ const searchInstitute: Interfaces.Controllers.Async = async (
       throw new Error("Please Provide a Name");
     }
     const institute = await Utils.Institute.getInstitute(instituteName);
-    if (!institute) {
-      throw new Error("No Institutes Yet");
-    }
+
     return res.json(
       Utils.Response.success({
         institutes: institute,

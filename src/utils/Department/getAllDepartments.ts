@@ -22,7 +22,7 @@ const getAllDepartments = async (id: string) => {
     });
     return departments;
   } catch (err) {
-    return null;
+    throw new Error("Something Went Wrong...");
   }
 };
 

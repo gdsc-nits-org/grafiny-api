@@ -9,7 +9,7 @@ const getAllInstitute = async () => {
     });
     return institutes;
   } catch (err) {
-    return null;
+    throw new Error("Something went wrong...");
   }
 };
 

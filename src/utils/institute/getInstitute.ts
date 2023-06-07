@@ -15,7 +15,7 @@ const getInstitute = async (name: string) => {
 
     return institute;
   } catch (err) {
-    return null;
+    throw new Error("Something Went Wrong...");
   }
 };
 

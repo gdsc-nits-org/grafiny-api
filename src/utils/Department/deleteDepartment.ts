@@ -10,7 +10,7 @@ const deleteDepartment = async (id: string) => {
 
     return deletedDepartment;
   } catch (err) {
-    return null;
+    throw new Error("Something Went Wrong...");
   }
 };
 

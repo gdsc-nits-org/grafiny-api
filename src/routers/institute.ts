@@ -20,6 +20,6 @@ router.post(
 );
 router.get("/getAll", getAllInstitute);
 router.get("/search", isAuthenticated, searchInstitute);
-router.delete("/delete", isAuthenticated, checkSuperAdmin, deleteInstitute);
+router.delete("/", isAuthenticated, checkSuperAdmin, deleteInstitute);
 
 export default router;

@@ -10,7 +10,7 @@ const deleteInstitute = async (name: string) => {
 
     return deletedInstitute;
   } catch (err) {
-    return null;
+    throw new Error("Could not Delete Institute...");
   }
 };
 

@@ -8,9 +8,7 @@ const getAllInstitute: Interfaces.Controllers.Async = async (
 ) => {
   try {
     const institutes = await Utils.Institute.getAllInstitute();
-    if (!institutes) {
-      throw new Error("No Institutes Yet");
-    }
+
     return res.json(
       Utils.Response.success({
         institutes: institutes,

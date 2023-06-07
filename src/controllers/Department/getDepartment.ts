@@ -8,9 +8,7 @@ const getDepartment: Interfaces.Controllers.Async = async (req, res, next) => {
       throw new Error("Please Provide a Id");
     }
     const department = await Utils.Department.getDepartment(departmentId);
-    if (!department) {
-      throw new Error("No Department Found");
-    }
+
     return res.json(
       Utils.Response.success({
         department: department,

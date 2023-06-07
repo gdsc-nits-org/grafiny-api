@@ -10,7 +10,7 @@ const createInstitute = async (name: string) => {
     return institute;
   } catch (err) {
     console.log(err);
-    return null;
+    throw new Error("Could not create Institute...");
   }
 };
 

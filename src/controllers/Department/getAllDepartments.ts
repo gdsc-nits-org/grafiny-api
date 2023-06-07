@@ -12,9 +12,7 @@ const getAllDepartments: Interfaces.Controllers.Async = async (
       throw new Error("Please Provide Institute Id");
     }
     const departments = await Utils.Department.getAllDepartments(instituteId);
-    if (!departments) {
-      throw new Error("No Departments Yet");
-    }
+
     return res.json(
       Utils.Response.success({
         departments: departments,

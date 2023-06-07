@@ -25,7 +25,7 @@ const createDepartment = async (name: string, instituteName: string) => {
 
     return department;
   } catch (err) {
-    return null;
+    throw new Error("Could not create Department...");
   }
 };
 

@@ -8,11 +8,10 @@ const deleteInstitute: Interfaces.Controllers.Async = async (
 ) => {
   try {
     const name: string = req.query.institutename as string;
-    const deletedInstitute = await Utils.Institute.deleteInstitute(name);
-
-    if (deletedInstitute === null) {
-      throw new Error("No Such Institute Exists");
+    if (!name) {
+      throw new Error("Please Provide Institute Name...");
     }
+    const deletedInstitute = await Utils.Institute.deleteInstitute(name);
 
     return res.json(
       Utils.Response.success({

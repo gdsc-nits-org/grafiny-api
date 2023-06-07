@@ -12,7 +12,7 @@ const getDepartment = async (id: string) => {
     });
     return department;
   } catch (err) {
-    return null;
+    throw new Error("Something Went Wrong...");
   }
 };
 

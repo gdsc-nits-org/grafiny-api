@@ -8,8 +8,8 @@ const createDepartment: Interfaces.Controllers.Async = async (
 ) => {
   try {
     const data: Interfaces.Department = req.body;
-    const name: string = data.name;
-    const instituteName: string = req.body.instituteName;
+    const name = data.name;
+    const instituteName = data.instituteName;
 
     if (!name || !instituteName) {
       throw new Error("Please Provide department and institute name");
@@ -18,9 +18,6 @@ const createDepartment: Interfaces.Controllers.Async = async (
       name,
       instituteName
     );
-    if (department === null) {
-      throw new Error("Could not create Department");
-    }
 
     return res.json(
       Utils.Response.success({
