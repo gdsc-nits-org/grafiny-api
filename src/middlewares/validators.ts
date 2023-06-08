@@ -13,4 +13,8 @@ const LOGIN_VALIDATOR = [
   body("password").isString().not().isEmpty().isLength({ min: 6 }),
 ];
 
-export { SIGNUP_VALIDATOR, LOGIN_VALIDATOR };
+const INSTITUTE_VALIDATOR = [
+  body("name").custom(Utils.Institute.checkInstitute),
+];
+
+export { SIGNUP_VALIDATOR, LOGIN_VALIDATOR, INSTITUTE_VALIDATOR };
