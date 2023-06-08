@@ -11,12 +11,12 @@ datasource db {
 }
 
 model User {
-  id       String   @id @default(auto()) @map("_id") @db.ObjectId
-  name     String
-  email    String   @unique
-  password String
-  isAdmin  Int      @default(0)
-  profile  Profile?
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  name               String
+  email              String   @unique
+  password           String
+  authorisationLevel LEVEL    @default(ZERO)
+  profile            Profile?
 }
 
 model Profile {
@@ -93,4 +93,10 @@ enum YEAR {
   SECOND
   THIRD
   FOURTH
+}
+
+enum LEVEL {
+  ZERO
+  ONE
+  TWO
 }
