@@ -10,7 +10,12 @@ import * as Middlewares from "./src/middlewares";
 import * as Routers from "./src/routers";
 import * as Constants from "./src/globals/constants";
 import * as Utils from "./src/utils";
-import { authRouter, instituteRouter, departmentRouter } from "./src/routers";
+import {
+  authRouter,
+  instituteRouter,
+  departmentRouter,
+  courseRouter,
+} from "./src/routers";
 
 const app = express();
 
@@ -30,7 +35,7 @@ app
   .use(
     cookieSession({
       name: "session",
-      keys: ["graffinykey"],
+      keys: [`${process.env.GRAFFINY_KEY}`],
       sameSite: "none",
       maxAge: 3 * 24 * 60 * 60 * 1000,
       httpOnly: true,
@@ -50,6 +55,7 @@ app.use(`${Constants.System.ROOT}/`, Routers.Health);
 app.use(`${Constants.System.ROOT}/auth`, authRouter);
 app.use(`${Constants.System.ROOT}/institute`, instituteRouter);
 app.use(`${Constants.System.ROOT}/department`, departmentRouter);
+app.use(`${Constants.System.ROOT}/course`, courseRouter);
 
 // Error Handlers
 app.use(Middlewares.Error.errorHandler);
