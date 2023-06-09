@@ -1,7 +1,7 @@
 import * as Utils from "../utils/response";
 
 const checkSuperAdmin = async (req: any, _res: any, next: any) => {
-  if (req.user.isAdmin == 2) {
+  if (req.user && req.user.authorisationLevel === "TWO") {
     return next();
   }
 
