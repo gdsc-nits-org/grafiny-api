@@ -15,7 +15,7 @@ model User {
   name               String
   email              String   @unique
   password           String
-  authorisationLevel LEVEL    @default(ZERO)
+  authorisationLevel LEVEL    @default(USER)
   profile            Profile?
 }
 
@@ -96,7 +96,7 @@ enum YEAR {
 }
 
 enum LEVEL {
-  ZERO
-  ONE
-  TWO
+  USER
+  ADMIN
+  SUPERADMIN
 }

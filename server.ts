@@ -35,7 +35,7 @@ app
   .use(
     cookieSession({
       name: "session",
-      keys: [`${process.env.GRAFFINY_KEY}`],
+      keys: [process.env.GRAFINY_KEY!],
       sameSite: "none",
       maxAge: 3 * 24 * 60 * 60 * 1000,
       httpOnly: true,

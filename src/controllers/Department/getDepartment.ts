@@ -3,15 +3,22 @@ import * as Utils from "../../utils/index";
 
 const getDepartment: Interfaces.Controllers.Async = async (req, res, next) => {
   try {
-    const departmentId = req.query.id as string;
-    if (!departmentId) {
-      throw new Error("Please Provide a Id");
+    const id = req.query.id as string;
+    if (!id) {
+      throw new Error("Please Provide a Department Id");
     }
-    const department = await Utils.Department.getDepartment(departmentId);
+    const department = await Utils.prisma.department.findFirst({
+      where: {
+        id,
+      },
+      include: {
+        courses: true,
+      },
+    });
 
     return res.json(
       Utils.Response.success({
-        department: department,
+        department,
       })
     );
   } catch (err) {

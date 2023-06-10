@@ -7,14 +7,15 @@ const deleteDepartment: Interfaces.Controllers.Async = async (
   next
 ) => {
   try {
-    const departmentId: string = req.query.id as string;
-    if (!departmentId) {
+    const id: string = req.query.id as string;
+    if (!id) {
       throw new Error("Please Provide a Department Id");
     }
-    const deletedDepartment = await Utils.Department.deleteDepartment(
-      departmentId
-    );
-
+    const deletedDepartment = await Utils.prisma.department.delete({
+      where: {
+        id,
+      },
+    });
     return res.json(
       Utils.Response.success({
         msg: deletedDepartment,

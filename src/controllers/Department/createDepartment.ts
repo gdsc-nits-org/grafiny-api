@@ -7,21 +7,35 @@ const createDepartment: Interfaces.Controllers.Async = async (
   next
 ) => {
   try {
-    const data: Interfaces.Department = req.body;
-    const name = data.name;
-    const instituteName = data.instituteName;
+    const { name, instituteName } = req.body as Interfaces.Department;
 
     if (!name || !instituteName) {
       throw new Error("Please Provide department and institute name");
     }
-    const department = await Utils.Department.createDepartment(
-      name,
-      instituteName
-    );
+    const institute = await Utils.prisma.institution.findFirst({
+      where: {
+        name: instituteName,
+      },
+    });
+
+    if (!institute) {
+      throw new Error("No Such Institute");
+    }
+
+    const department = await Utils.prisma.department.create({
+      data: {
+        name,
+        institution: {
+          connect: {
+            id: institute.id,
+          },
+        },
+      },
+    });
 
     return res.json(
       Utils.Response.success({
-        department: department,
+        department,
       })
     );
   } catch (err) {

@@ -3,18 +3,36 @@ import * as Utils from "../../utils/index";
 
 const createCourse: Interfaces.Controllers.Async = async (req, res, next) => {
   try {
-    const data: Interfaces.CourseAndTopic = req.body;
-    const name: string = data.name;
-    const departmentId: string = req.body.departmentId;
+    const { name, id } = req.body as Interfaces.CourseAndTopic;
 
-    if (!name || !departmentId) {
+    if (!name || !id) {
       throw new Error("Please Provide department id and course name");
     }
-    const course = await Utils.Course.createCourse(name, departmentId);
+
+    const department = await Utils.prisma.department.findFirst({
+      where: {
+        id,
+      },
+    });
+
+    if (!department) {
+      throw new Error("No Such Department Found!!!");
+    }
+
+    const course = await Utils.prisma.course.create({
+      data: {
+        name,
+        department: {
+          connect: {
+            id: department.id,
+          },
+        },
+      },
+    });
 
     return res.json(
       Utils.Response.success({
-        course: course,
+        course,
       })
     );
   } catch (err) {

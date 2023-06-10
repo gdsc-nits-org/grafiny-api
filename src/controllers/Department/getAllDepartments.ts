@@ -7,15 +7,33 @@ const getAllDepartments: Interfaces.Controllers.Async = async (
   next
 ) => {
   try {
-    const instituteId: string = req.query.id as string;
-    if (!instituteId) {
+    const id: string = req.query.id as string;
+    if (!id) {
       throw new Error("Please Provide Institute Id");
     }
-    const departments = await Utils.Department.getAllDepartments(instituteId);
+
+    const institute = await Utils.prisma.institution.findFirst({
+      where: {
+        id,
+      },
+    });
+
+    if (!institute) {
+      throw new Error("No Such Institute Found");
+    }
+
+    const departments = await Utils.prisma.department.findMany({
+      where: {
+        instituteID: institute.id,
+      },
+      include: {
+        courses: true,
+      },
+    });
 
     return res.json(
       Utils.Response.success({
-        departments: departments,
+        departments,
       })
     );
   } catch (err) {

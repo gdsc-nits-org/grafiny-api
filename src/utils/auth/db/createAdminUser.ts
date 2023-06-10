@@ -5,7 +5,7 @@ import { LEVEL } from "@prisma/client";
 
 const createAdminUser = async (user: User) => {
   const hash = hashedPassword(user.password);
-  const status: LEVEL = "ONE";
+  const status: LEVEL = "ADMIN";
   const createdUser = await prisma.user.create({
     data: {
       name: user.name,
@@ -19,7 +19,7 @@ const createAdminUser = async (user: User) => {
 
 const createSuperAdminUser = async (user: User) => {
   const hash = hashedPassword(user.password);
-  const status: LEVEL = "TWO";
+  const status: LEVEL = "SUPERADMIN";
   const createdUser = await prisma.user.create({
     data: {
       name: user.name,

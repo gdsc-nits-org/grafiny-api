@@ -3,8 +3,8 @@ import * as Utils from "../utils/response";
 const checkAdmin = async (req: any, _res: any, next: any) => {
   if (
     req.user &&
-    (req.user.authorisationLevel === "ONE" ||
-      req.user.authorisationLevel === "TWO")
+    (req.user.authorisationLevel === "ADMIN" ||
+      req.user.authorisationLevel === "SUPERADMIN")
   ) {
     return next();
   }
