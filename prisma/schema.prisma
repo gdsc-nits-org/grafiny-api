@@ -63,11 +63,11 @@ model Course {
 }
 
 model Topic {
-  id         String  @id @default(auto()) @map("_id") @db.ObjectId //Incomplete
-  name       String
-  department Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  courseId   String  @db.ObjectId
-  items      Items[]
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId //Incomplete
+  name     String
+  course   Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  courseId String  @db.ObjectId
+  items    Items[]
 }
 
 model Items {
