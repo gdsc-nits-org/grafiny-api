@@ -7,11 +7,15 @@ const getAllInstitute: Interfaces.Controllers.Async = async (
   next
 ) => {
   try {
-    const institutes = await Utils.Institute.getAllInstitute();
+    const institutes = await Utils.prisma.institution.findMany({
+      include: {
+        departments: true,
+      },
+    });
 
     return res.json(
       Utils.Response.success({
-        institutes: institutes,
+        institutes,
       })
     );
   } catch (err) {

@@ -1,5 +1,6 @@
 import * as Interfaces from "../../interfaces/index";
 import * as Utils from "../../utils/index";
+import { invalidDetails } from "src/globals/errors";
 
 const getAllDepartments: Interfaces.Controllers.Async = async (
   req,
@@ -9,7 +10,7 @@ const getAllDepartments: Interfaces.Controllers.Async = async (
   try {
     const id: string = req.query.id as string;
     if (!id) {
-      throw new Error("Please Provide Institute Id");
+      return res.json(invalidDetails);
     }
 
     const institute = await Utils.prisma.institution.findFirst({
@@ -19,7 +20,7 @@ const getAllDepartments: Interfaces.Controllers.Async = async (
     });
 
     if (!institute) {
-      throw new Error("No Such Institute Found");
+      return res.json(invalidDetails);
     }
 
     const departments = await Utils.prisma.department.findMany({

@@ -1,3 +1,4 @@
+import { invalidDetails } from "src/globals/errors";
 import * as Interfaces from "../../interfaces/index";
 import * as Utils from "../../utils/index";
 
@@ -6,7 +7,7 @@ const createTopic: Interfaces.Controllers.Async = async (req, res, next) => {
     const { name, id } = req.body as Interfaces.CourseAndTopic;
 
     if (!name || !id) {
-      throw new Error("Please Provide course id and topic name");
+      return res.json(invalidDetails);
     }
     const course = await Utils.prisma.course.findFirst({
       where: {
@@ -15,7 +16,7 @@ const createTopic: Interfaces.Controllers.Async = async (req, res, next) => {
     });
 
     if (!course) {
-      throw new Error("No Such Course");
+      return res.json(invalidDetails);
     }
 
     const topic = await Utils.prisma.topic.create({
@@ -28,10 +29,6 @@ const createTopic: Interfaces.Controllers.Async = async (req, res, next) => {
         },
       },
     });
-
-    if (!topic) {
-      throw new Error("Could not create Topic");
-    }
 
     return res.json(
       Utils.Response.success({

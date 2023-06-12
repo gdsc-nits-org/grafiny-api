@@ -1,11 +1,12 @@
 import * as Interfaces from "../../interfaces/index";
 import * as Utils from "../../utils/index";
+import { invalidDetails } from "src/globals/errors";
 
 const getTopic: Interfaces.Controllers.Async = async (req, res, next) => {
   try {
     const topicId = req.query.id as string;
     if (!topicId) {
-      throw new Error("Please Provide a Id");
+      return res.json(invalidDetails);
     }
     const topic = await Utils.prisma.topic.findFirst({
       where: {
@@ -15,9 +16,7 @@ const getTopic: Interfaces.Controllers.Async = async (req, res, next) => {
         items: true,
       },
     });
-    if (!topic) {
-      throw new Error("No Topic Found");
-    }
+
     return res.json(
       Utils.Response.success({
         topic,

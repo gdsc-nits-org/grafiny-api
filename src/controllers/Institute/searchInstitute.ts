@@ -1,3 +1,4 @@
+import { invalidDetails } from "src/globals/errors";
 import * as Interfaces from "../../interfaces/index";
 import * as Utils from "../../utils/index";
 
@@ -9,13 +10,22 @@ const searchInstitute: Interfaces.Controllers.Async = async (
   try {
     const instituteName = req.query.institutename as string;
     if (!instituteName) {
-      throw new Error("Please Provide a Name");
+      return res.json(invalidDetails);
     }
-    const institute = await Utils.Institute.getInstitute(instituteName);
+    const institutes = await Utils.prisma.institution.findMany({
+      where: {
+        name: {
+          contains: instituteName.toUpperCase(),
+        },
+      },
+      include: {
+        departments: true,
+      },
+    });
 
     return res.json(
       Utils.Response.success({
-        institutes: institute,
+        institutes,
       })
     );
   } catch (err) {

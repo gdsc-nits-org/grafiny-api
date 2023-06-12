@@ -1,11 +1,12 @@
 import * as Interfaces from "../../interfaces/index";
 import * as Utils from "../../utils/index";
+import { invalidDetails } from "src/globals/errors";
 
 const getAllCourses: Interfaces.Controllers.Async = async (req, res, next) => {
   try {
     const id: string = req.query.id as string;
     if (!id) {
-      throw new Error("Please Provide Department Id");
+      return res.json(invalidDetails);
     }
     const department = await Utils.prisma.department.findFirst({
       where: {
@@ -14,7 +15,7 @@ const getAllCourses: Interfaces.Controllers.Async = async (req, res, next) => {
     });
 
     if (!department) {
-      throw new Error("No Such Department");
+      return res.json(invalidDetails);
     }
 
     const courses = await Utils.prisma.course.findMany({

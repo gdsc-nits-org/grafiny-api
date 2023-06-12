@@ -1,5 +1,6 @@
 import * as Interfaces from "../../interfaces/index";
 import * as Utils from "../../utils/index";
+import { invalidDetails } from "src/globals/errors";
 
 const createDepartment: Interfaces.Controllers.Async = async (
   req,
@@ -10,7 +11,7 @@ const createDepartment: Interfaces.Controllers.Async = async (
     const { name, instituteName } = req.body as Interfaces.Department;
 
     if (!name || !instituteName) {
-      throw new Error("Please Provide department and institute name");
+      return res.json(invalidDetails);
     }
     const institute = await Utils.prisma.institution.findFirst({
       where: {
@@ -19,7 +20,7 @@ const createDepartment: Interfaces.Controllers.Async = async (
     });
 
     if (!institute) {
-      throw new Error("No Such Institute");
+      return res.json(invalidDetails);
     }
 
     const department = await Utils.prisma.department.create({

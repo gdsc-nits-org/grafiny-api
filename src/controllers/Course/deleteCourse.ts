@@ -1,11 +1,12 @@
 import * as Interfaces from "../../interfaces/index";
 import * as Utils from "../../utils/index";
+import { invalidDetails } from "src/globals/errors";
 
 const deleteCourse: Interfaces.Controllers.Async = async (req, res, next) => {
   try {
     const id: string = req.query.id as string;
     if (!id) {
-      throw new Error("Please Provide a Course Id");
+      return res.json(invalidDetails);
     }
     const deletedCourse = await Utils.prisma.course.delete({
       where: {
