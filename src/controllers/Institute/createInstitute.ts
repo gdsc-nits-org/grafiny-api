@@ -15,7 +15,7 @@ const createInstitute: Interfaces.Controllers.Async = async (
 
     const existingInstitute = await Utils.prisma.institution.findFirst({
       where: {
-        name,
+        name: name.toUpperCase(),
       },
     });
 
