@@ -23,6 +23,22 @@ const createDepartment: Interfaces.Controllers.Async = async (
       return res.json(invalidDetails);
     }
 
+    const existingDepartment = await Utils.prisma.department.findFirst({
+      where: {
+        name: name,
+        instituteID: institute.id,
+      },
+    });
+
+    if (existingDepartment) {
+      return res.json(
+        Utils.Response.error(
+          "Department With This Name Already Exists. Please Try a With Different Name",
+          409
+        )
+      );
+    }
+
     const department = await Utils.prisma.department.create({
       data: {
         name,

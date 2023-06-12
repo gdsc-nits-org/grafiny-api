@@ -19,6 +19,22 @@ const createTopic: Interfaces.Controllers.Async = async (req, res, next) => {
       return res.json(invalidDetails);
     }
 
+    const existingTopic = await Utils.prisma.topic.findFirst({
+      where: {
+        name: name,
+        courseId: course.id,
+      },
+    });
+
+    if (existingTopic) {
+      return res.json(
+        Utils.Response.error(
+          "Topic With This Name Already Exists. Please Try a With Different Name",
+          409
+        )
+      );
+    }
+
     const topic = await Utils.prisma.topic.create({
       data: {
         name,

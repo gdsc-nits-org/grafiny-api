@@ -20,6 +20,22 @@ const createCourse: Interfaces.Controllers.Async = async (req, res, next) => {
       return res.json(invalidDetails);
     }
 
+    const existingCourse = await Utils.prisma.course.findFirst({
+      where: {
+        name: name,
+        departmentId: department.id,
+      },
+    });
+
+    if (existingCourse) {
+      return res.json(
+        Utils.Response.error(
+          "Course With This Name Already Exists. Please Try a With Different Name",
+          409
+        )
+      );
+    }
+
     const course = await Utils.prisma.course.create({
       data: {
         name,
