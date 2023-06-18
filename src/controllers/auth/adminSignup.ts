@@ -11,7 +11,7 @@ const adminSignUp: Interfaces.Controllers.Async = async (req, res, next) => {
         id: user.id,
         email: user.email,
         password: null,
-        isAdmin: user.isAdmin,
+        isAdmin: user.authorisationLevel,
       })
     );
   } catch (err) {
@@ -33,7 +33,7 @@ const superAdminSignUp: Interfaces.Controllers.Async = async (
         id: user.id,
         email: user.email,
         password: null,
-        isAdmin: user.isAdmin,
+        isAdmin: user.authorisationLevel,
       })
     );
   } catch (err) {

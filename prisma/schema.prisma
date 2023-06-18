@@ -11,12 +11,12 @@ datasource db {
 }
 
 model User {
-  id       String   @id @default(auto()) @map("_id") @db.ObjectId
-  name     String
-  email    String   @unique
-  password String
-  isAdmin  Int      @default(0)
-  profile  Profile?
+  id                 String     @id @default(auto()) @map("_id") @db.ObjectId
+  name               String
+  email              String     @unique
+  password           String
+  authorisationLevel AUTH_LEVEL @default(USER)
+  profile            Profile?
 }
 
 model Profile {
@@ -52,6 +52,8 @@ model Department {
   institution Institution @relation(fields: [instituteID], references: [id], onDelete: Cascade)
   instituteID String      @db.ObjectId
   courses     Course[]
+
+  @@unique([instituteID, name])
 }
 
 model Course {
@@ -60,14 +62,18 @@ model Course {
   department   Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
   departmentId String     @db.ObjectId
   topic        Topic[]
+
+  @@unique([departmentId, name])
 }
 
 model Topic {
-  id         String  @id @default(auto()) @map("_id") @db.ObjectId //Incomplete
-  name       String
-  department Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  courseId   String  @db.ObjectId
-  items      Items[]
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId //Incomplete
+  name     String
+  course   Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  courseId String  @db.ObjectId
+  items    Items[]
+
+  @@unique([courseId, name])
 }
 
 model Items {
@@ -93,4 +99,10 @@ enum YEAR {
   SECOND
   THIRD
   FOURTH
+}
+
+enum AUTH_LEVEL {
+  USER
+  ADMIN
+  SUPERADMIN
 }

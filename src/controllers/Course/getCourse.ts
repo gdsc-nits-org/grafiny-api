@@ -2,24 +2,24 @@ import * as Interfaces from "../../interfaces/index";
 import * as Utils from "../../utils/index";
 import { invalidDetails } from "src/globals/errors";
 
-const getDepartment: Interfaces.Controllers.Async = async (req, res, next) => {
+const getCourse: Interfaces.Controllers.Async = async (req, res, next) => {
   try {
     const id = req.query.id as string;
     if (!id) {
       return res.json(invalidDetails);
     }
-    const department = await Utils.prisma.department.findFirst({
+    const course = await Utils.prisma.course.findFirst({
       where: {
         id,
       },
       include: {
-        courses: true,
+        topic: true,
       },
     });
 
     return res.json(
       Utils.Response.success({
-        department,
+        course,
       })
     );
   } catch (err) {
@@ -27,4 +27,4 @@ const getDepartment: Interfaces.Controllers.Async = async (req, res, next) => {
   }
 };
 
-export default getDepartment;
+export default getCourse;

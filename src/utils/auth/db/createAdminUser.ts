@@ -1,6 +1,7 @@
 import hashedPassword from "../passwordhash";
 import prisma from "src/utils/prisma";
 import { User } from "src/interfaces";
+import { AUTH_LEVEL } from "@prisma/client";
 
 const createAdminUser = async (user: User) => {
   const hash = hashedPassword(user.password);
@@ -9,7 +10,7 @@ const createAdminUser = async (user: User) => {
       name: user.name,
       email: user.email,
       password: hash,
-      isAdmin: 1,
+      authorisationLevel: AUTH_LEVEL.ADMIN,
     },
   });
   return createdUser;
@@ -22,7 +23,7 @@ const createSuperAdminUser = async (user: User) => {
       name: user.name,
       email: user.email,
       password: hash,
-      isAdmin: 2,
+      authorisationLevel: AUTH_LEVEL.SUPERADMIN,
     },
   });
   return createdUser;

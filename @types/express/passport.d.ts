@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import { User, AUTH_LEVEL } from "@prisma/client";
 
 declare global {
   namespace Express {
@@ -7,7 +7,7 @@ declare global {
       name: string;
       email: string;
       password: string;
-      isAdmin: number;
+      authorisationLevel: AUTH_LEVEL;
     }
     export interface Request {
       session?: any;

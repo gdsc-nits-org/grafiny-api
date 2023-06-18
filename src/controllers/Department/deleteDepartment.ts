@@ -1,5 +1,6 @@
 import * as Interfaces from "../../interfaces/index";
 import * as Utils from "../../utils/index";
+import { invalidDetails } from "src/globals/errors";
 
 const deleteDepartment: Interfaces.Controllers.Async = async (
   req,
@@ -7,14 +8,15 @@ const deleteDepartment: Interfaces.Controllers.Async = async (
   next
 ) => {
   try {
-    const departmentId: string = req.query.id as string;
-    if (!departmentId) {
-      throw new Error("Please Provide a Department Id");
+    const id: string = req.query.id as string;
+    if (!id) {
+      return res.json(invalidDetails);
     }
-    const deletedDepartment = await Utils.Department.deleteDepartment(
-      departmentId
-    );
-
+    const deletedDepartment = await Utils.prisma.department.delete({
+      where: {
+        id,
+      },
+    });
     return res.json(
       Utils.Response.success({
         msg: deletedDepartment,
