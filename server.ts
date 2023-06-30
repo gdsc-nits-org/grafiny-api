@@ -16,6 +16,7 @@ import {
   departmentRouter,
   courseRouter,
   topicRouter,
+  profileRouter,
 } from "./src/routers";
 
 const app = express();
@@ -58,6 +59,7 @@ app.use(`${Constants.System.ROOT}/institute`, instituteRouter);
 app.use(`${Constants.System.ROOT}/department`, departmentRouter);
 app.use(`${Constants.System.ROOT}/course`, courseRouter);
 app.use(`${Constants.System.ROOT}/topic`, topicRouter);
+app.use(`${Constants.System.ROOT}/profile`, profileRouter);
 
 // Error Handlers
 app.use(Middlewares.Error.errorHandler);

@@ -6,13 +6,13 @@ const createProfile = async (
   year: YEAR,
   user: User,
   institute: Institution,
-  profilePic: string
+  profilePic?: string
 ) => {
   const profile: Profile = await prisma.profile.create({
     data: {
       scholarId: scholarId,
       year: year,
-      profilePic: profilePic,
+      profilePic: profilePic ? profilePic : "",
       user: {
         connect: {
           id: user.id,
