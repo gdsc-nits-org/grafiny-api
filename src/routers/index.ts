@@ -5,6 +5,7 @@ import departmentRouter from "./department";
 import courseRouter from "./course";
 import topicRouter from "./topic";
 import profileRouter from "./profile";
+import uploadRouter from "./upload";
 
 export {
   Health,
@@ -14,4 +15,5 @@ export {
   courseRouter,
   topicRouter,
   profileRouter,
+  uploadRouter,
 };

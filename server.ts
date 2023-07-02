@@ -5,7 +5,6 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import cookieSession from "cookie-session";
 import passport from "passport";
-
 import * as Middlewares from "./src/middlewares";
 import * as Routers from "./src/routers";
 import * as Constants from "./src/globals/constants";
@@ -17,6 +16,7 @@ import {
   courseRouter,
   topicRouter,
   profileRouter,
+  uploadRouter,
 } from "./src/routers";
 
 const app = express();
@@ -60,8 +60,10 @@ app.use(`${Constants.System.ROOT}/department`, departmentRouter);
 app.use(`${Constants.System.ROOT}/course`, courseRouter);
 app.use(`${Constants.System.ROOT}/topic`, topicRouter);
 app.use(`${Constants.System.ROOT}/profile`, profileRouter);
+app.use(`${Constants.System.ROOT}/file`, uploadRouter);
 
 // Error Handlers
 app.use(Middlewares.Error.errorHandler);
-
-export default app;
+app.listen(process.env.PORT, () => {
+  console.log(`http://localhost:${process.env.PORT}`);
+});

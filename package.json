@@ -3,13 +3,15 @@
   "config": {
     "dist_dir": "dist",
     "build_dir": "build",
-    "build_entry": "handler.js",
+    "build_entry": "server.js",
     "dist_outfile": "main.js"
   },
   "scripts": {
     "start": "pnpm build && sls offline --httpPort 5000",
     "start-win": "pnpm build-win && sls offline --httpPort 5000",
-    "dev": "nodemon -e ts --exec 'pnpm run start'",
+    "start-server": "pnpm build-win &&  node ./dist/main.js",
+    "dev-start": "nodemon -e ts --exec pnpm run start-server",
+    "dev": "nodemon -e ts --exec pnpm run dev-start",
     "dev-win": "nodemon -e ts --exec pnpm run start-win",
     "build": "pnpm compile && pnpm esbuild && rm -rf $npm_package_config_build_dir",
     "build-win": "pnpm compile && pnpm esbuild-win && del /s /q /f %npm_package_config_build_dir% 1>nul",
@@ -41,8 +43,6 @@
     "nodemon": "^2.0.20",
     "prettier": "^2.8.3",
     "prisma": "^4.15.0",
-    "serverless": "^3.26.0",
-    "serverless-offline": "^12.0.4",
     "simple-git-hooks": "^2.8.1",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.1.2",
@@ -61,8 +61,7 @@
     "morgan": "^1.10.0",
     "multer": "1.4.5-lts.1",
     "passport": "0.5",
-    "passport-local": "^1.0.0",
-    "serverless-http": "^3.1.1"
+    "passport-local": "^1.0.0"
   },
   "lint-staged": {
     "*.ts": [
