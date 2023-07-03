@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 import multer, { FileFilterCallback } from "multer";
-import { s3Upload } from "../../utils/upload/aws";
+import { s3Upload } from "../../utils/aws/upload";
 
 const storage = multer.memoryStorage();
 const fileFilter = (_: any, file: any, cb: FileFilterCallback) => {
