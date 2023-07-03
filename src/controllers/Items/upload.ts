@@ -34,7 +34,9 @@ export const handleUpload: RequestHandler = async (req: any, res: any) => {
           .json({ error: "Only 5 files are allowed at a time" });
       }
       if (err.code === "LIMIT_UNEXPECTED_FILE") {
-        return res.status(422).json({ error: "Only pdf files are allowed" });
+        return res
+          .status(422)
+          .json({ error: "Only pdf files and images are allowed" });
       }
     }
     if (err) {

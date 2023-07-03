@@ -62,5 +62,6 @@ app.use(`${Constants.System.ROOT}/topic`, topicRouter);
 app.use(`${Constants.System.ROOT}/items`, itemsRouter);
 // Error Handlers
 app.use(Middlewares.Error.errorHandler);
-
-export default app;
+app.listen(process.env.PORT, () => {
+  console.log(`http://localhost:${process.env.PORT}`);
+});
