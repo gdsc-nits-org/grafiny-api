@@ -18,8 +18,10 @@ export const s3Upload = async (files: Express.Multer.File[] | undefined) => {
 
   const params = files.map((file) => ({
     Bucket: process.env.AWS_BUCKET_NAME,
-    Key: `test/${file.originalname}`,
+    Key: Date.now() + `${file.originalname}`,
     Body: file.buffer,
+    ContentType: file.mimetype,
+    acl: "public-read",
   }));
 
   return await Promise.all(
