@@ -13,7 +13,7 @@ export const s3Upload = async (files: Express.Multer.File[] | undefined) => {
       accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
       secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
     },
-    region: "eu-north-1",
+    region: process.env.AWS_REGION!,
   });
 
   const params = files.map((file) => ({

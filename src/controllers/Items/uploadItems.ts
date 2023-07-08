@@ -1,4 +1,5 @@
 import { RequestHandler } from "express";
+import * as Utils from "../../utils";
 import multer, { FileFilterCallback } from "multer";
 import { s3Upload } from "../../utils/aws/upload";
 
@@ -26,31 +27,30 @@ export const handleUpload: RequestHandler = async (req: any, res: any) => {
   upload.array("file")(req, res, async (err) => {
     if (err instanceof multer.MulterError) {
       if (err.code === "LIMIT_FILE_SIZE") {
-        return res.status(422).json({ error: "Allowed file size is 20MB" });
+        return res.json(Utils.Response.error("File size too large", 422));
       }
       if (err.code === "LIMIT_FILE_COUNT") {
-        return res
-          .status(422)
-          .json({ error: "Only 5 files are allowed at a time" });
+        return res.json(Utils.Response.error("Only 5 files are allowed", 422));
       }
       if (err.code === "LIMIT_UNEXPECTED_FILE") {
-        return res
-          .status(422)
-          .json({ error: "Only pdf files and images are allowed" });
+        return res.json(
+          Utils.Response.error(
+            "Only pdf, jpeg, jpg, png files are allowed",
+            422
+          )
+        );
       }
     }
     if (err) {
-      return res.status(500).json({ error: "Internal server error" });
+      return res.json(Utils.Response.error("Error uploading file", 500));
     }
     try {
       const results = await s3Upload(req.files);
       console.log(results);
-      return res.json({ message: "File uploaded successfully" });
+      return res.json(Utils.Response.success({ results }));
     } catch (err) {
       console.log(err);
-      return res
-        .status(500)
-        .json({ error: "Error uploading file", details: err });
+      return res.json(Utils.Response.error("Error uploading file", 500));
     }
   });
 };
