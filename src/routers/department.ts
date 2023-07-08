@@ -1,4 +1,4 @@
-import { Router } from "express";
+import express from "express";
 import { checkAdmin, isAuthenticated } from "src/middlewares";
 import {
   createDepartment,
@@ -7,7 +7,7 @@ import {
   deleteDepartment,
 } from "src/controllers/Department";
 
-const router: Router = Router();
+const router = express.Router();
 
 router.post("/create", isAuthenticated, checkAdmin, createDepartment);
 router.get("/getAll", getAllDepartments);

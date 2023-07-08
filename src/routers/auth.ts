@@ -1,4 +1,4 @@
-import { Router } from "express";
+import express from "express";
 import {
   signUp,
   login,
@@ -10,7 +10,7 @@ import { LOGIN_VALIDATOR, SIGNUP_VALIDATOR } from "src/middlewares/validators";
 import { validate } from "src/middlewares";
 import passport from "passport";
 
-const router: Router = Router();
+const router = express.Router();
 
 router.post("/signup", SIGNUP_VALIDATOR, validate, signUp);
 router.post(

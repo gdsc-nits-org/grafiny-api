@@ -1,4 +1,4 @@
-import { Router } from "express";
+import express from "express";
 import { isAuthenticated } from "src/middlewares";
 import {
   createCourse,
@@ -7,7 +7,7 @@ import {
   deleteCourse,
 } from "src/controllers/Course";
 
-const router: Router = Router();
+const router = express.Router();
 
 router.post("/create", isAuthenticated, createCourse);
 router.get("/getAll", getAllCourses);
