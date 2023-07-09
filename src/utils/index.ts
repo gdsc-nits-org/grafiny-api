@@ -1,6 +1,6 @@
 import * as Response from "./response";
 import prisma from "./prisma";
 import * as Auth from "./auth";
-import * as Institute from "./institute";
-
-export { Response, prisma, Auth, Institute };
+import * as Upload from "./upload";
+import * as Delete from "./delete";
+export { Response, prisma, Auth, Upload, Delete };

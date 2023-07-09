@@ -1,4 +1,4 @@
-import { Router } from "express";
+import express from "express";
 import { isAuthenticated } from "src/middlewares";
 import {
   createTopic,
@@ -7,7 +7,7 @@ import {
   deleteTopic,
 } from "src/controllers/Topics";
 
-const router: Router = Router();
+const router = express.Router();
 
 router.post("/create", isAuthenticated, createTopic);
 router.get("/getAll", getAllTopics);

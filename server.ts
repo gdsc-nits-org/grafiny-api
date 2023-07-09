@@ -10,13 +10,6 @@ import * as Middlewares from "./src/middlewares";
 import * as Routers from "./src/routers";
 import * as Constants from "./src/globals/constants";
 import * as Utils from "./src/utils";
-import {
-  authRouter,
-  instituteRouter,
-  departmentRouter,
-  courseRouter,
-  topicRouter,
-} from "./src/routers";
 
 const app = express();
 
@@ -53,13 +46,16 @@ passport.deserializeUser(Utils.Auth.passport.deserialiseUserFunction);
 
 // Routers
 app.use(`${Constants.System.ROOT}/`, Routers.Health);
-app.use(`${Constants.System.ROOT}/auth`, authRouter);
-app.use(`${Constants.System.ROOT}/institute`, instituteRouter);
-app.use(`${Constants.System.ROOT}/department`, departmentRouter);
-app.use(`${Constants.System.ROOT}/course`, courseRouter);
-app.use(`${Constants.System.ROOT}/topic`, topicRouter);
+app.use(`${Constants.System.ROOT}/auth`, Routers.authRouter);
+app.use(`${Constants.System.ROOT}/institute`, Routers.instituteRouter);
+app.use(`${Constants.System.ROOT}/department`, Routers.departmentRouter);
+app.use(`${Constants.System.ROOT}/course`, Routers.courseRouter);
+app.use(`${Constants.System.ROOT}/topic`, Routers.topicRouter);
+app.use(`${Constants.System.ROOT}/items`, Routers.itemsRouter);
 
 // Error Handlers
 app.use(Middlewares.Error.errorHandler);
 
-export default app;
+app.listen(process.env.PORT, () => {
+  console.log(`Server is running on port ${process.env.PORT}`);
+});

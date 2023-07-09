@@ -4,7 +4,7 @@ import instituteRouter from "./institute";
 import departmentRouter from "./department";
 import courseRouter from "./course";
 import topicRouter from "./topic";
-
+import itemsRouter from "./items";
 export {
   Health,
   authRouter,
@@ -12,4 +12,5 @@ export {
   departmentRouter,
   courseRouter,
   topicRouter,
+  itemsRouter,
 };
