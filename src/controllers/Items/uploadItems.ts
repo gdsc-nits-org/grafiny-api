@@ -1,29 +1,15 @@
 import { RequestHandler } from "express";
 import * as Utils from "../../utils";
-import multer, { FileFilterCallback } from "multer";
+import multer from "multer";
 import { s3Upload } from "../../utils/aws/upload";
-
 const storage = multer.memoryStorage();
-const fileFilter = (_: any, file: any, cb: FileFilterCallback) => {
-  if (
-    file.mimetype === "application/pdf" ||
-    file.mimetype === "image/jpeg" ||
-    file.mimetype === "image/png" ||
-    file.mimetype === "image/jpg"
-  ) {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
 
 const upload = multer({
   storage,
-  fileFilter,
   limits: { fileSize: 1024 * 1024 * 20, files: 5 },
 });
 
-export const handleUpload: RequestHandler = async (req: any, res: any) => {
+const handleUpload: RequestHandler = async (req: any, res: any) => {
   upload.array("file")(req, res, async (err) => {
     if (err instanceof multer.MulterError) {
       if (err.code === "LIMIT_FILE_SIZE") {
@@ -51,3 +37,4 @@ export const handleUpload: RequestHandler = async (req: any, res: any) => {
     }
   });
 };
+export default handleUpload;

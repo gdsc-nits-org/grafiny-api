@@ -1,17 +1,21 @@
 import express from "express";
-import { checkAdmin, isAuthenticated } from "src/middlewares";
-import {
-  createDepartment,
-  getAllDepartments,
-  getDepartment,
-  deleteDepartment,
-} from "src/controllers/Department";
+import * as Middlewares from "../middlewares";
+import * as Controllers from "../controllers";
 
 const router = express.Router();
 
-router.post("/create", isAuthenticated, checkAdmin, createDepartment);
-router.get("/getAll", getAllDepartments);
-router.get("/get", getDepartment);
-router.delete("/", isAuthenticated, checkAdmin, deleteDepartment);
+router.post(
+  "/create",
+  Middlewares.checkAdmin,
+  Controllers.Department.createDepartment
+);
+router.get("/getAll", Controllers.Department.getAllDepartments);
+router.get("/get", Controllers.Department.getDepartment);
+router.delete(
+  "/",
+  Middlewares.isAuthenticated,
+  Middlewares.checkAdmin,
+  Controllers.Department.deleteDepartment
+);
 
 export default router;

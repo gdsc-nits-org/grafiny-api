@@ -1,10 +1,8 @@
 import express from "express";
-// import { isAuthenticated } from "src/middlewares"; //will be checked afterwards
-import { handleUpload } from "../controllers/Items/uploadItems";
-import { deleteFileByName } from "../controllers/Items/deleteItems";
+import * as Controllers from "../controllers";
 
 const router = express.Router();
 
-router.post("/upload", handleUpload);
-router.delete("/:fileName", deleteFileByName);
+router.post("/upload", Controllers.Items.uploadItems);
+router.delete("/:fileName", Controllers.Items.deleteFileByName);
 export default router;
