@@ -1,7 +1,6 @@
 import { RequestHandler } from "express";
 import * as Utils from "../../utils";
 import multer from "multer";
-import { s3Upload } from "../../utils/aws/upload";
 const storage = multer.memoryStorage();
 
 const upload = multer({
@@ -28,7 +27,7 @@ const handleUpload: RequestHandler = async (req: any, res: any) => {
       }
     }
     try {
-      const results = await s3Upload(req.files);
+      const results = await Utils.Upload.s3Upload(req.files);
       console.log(results);
       return res.json(Utils.Response.success({ results }));
     } catch (err) {
