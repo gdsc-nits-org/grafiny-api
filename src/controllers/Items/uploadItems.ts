@@ -41,9 +41,6 @@ export const handleUpload: RequestHandler = async (req: any, res: any) => {
         );
       }
     }
-    if (err) {
-      return res.json(Utils.Response.error("Error uploading file", 500));
-    }
     try {
       const results = await s3Upload(req.files);
       console.log(results);
