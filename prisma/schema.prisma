@@ -92,6 +92,8 @@ model Items {
   likedByIds      String[]  @db.ObjectId
   dislikedBy      Profile[] @relation("dislikeditems", fields: [dislikedByIds], references: [id])
   dislikedByIds   String[]  @db.ObjectId
+
+  @@unique([topicId, name])
 }
 
 enum YEAR {
