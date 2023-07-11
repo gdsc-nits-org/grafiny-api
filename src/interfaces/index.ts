@@ -6,6 +6,7 @@ import User from "./user";
 import Department from "./department";
 import CourseAndTopic from "./course&topic";
 import Profile from "./profile";
+import Item from "./items";
 
 export {
   Controllers,
@@ -16,4 +17,5 @@ export {
   Department,
   CourseAndTopic,
   Profile,
+  Item,
 };
