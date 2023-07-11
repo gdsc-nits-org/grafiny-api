@@ -79,7 +79,7 @@ model Topic {
 model Items {
   id              String    @id @default(auto()) @map("_id") @db.ObjectId //Incomplete Model
   name            String
-  itemLink        String    @unique
+  file            File[]
   uploadedAt      DateTime  @default(now())
   modifiedAt      DateTime  @updatedAt()
   profile         Profile   @relation("uploadeditems", fields: [profileId], references: [id], onDelete: NoAction)
@@ -94,6 +94,14 @@ model Items {
   dislikedByIds   String[]  @db.ObjectId
 
   @@unique([topicId, name])
+}
+
+model File {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  url     String @unique
+  key     String @unique
+  file    Items  @relation(fields: [itemsId], references: [id], onDelete: Cascade)
+  itemsId String @db.ObjectId
 }
 
 enum YEAR {
