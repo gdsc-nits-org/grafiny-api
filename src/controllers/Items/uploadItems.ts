@@ -33,7 +33,7 @@ const handleUpload: RequestHandler = async (req: any, res: any) => {
       return res.json(Utils.Response.success({ results, fileUrls }));
     } catch (err) {
       console.log(err);
-      return res.json(Utils.Response.error("Error uploading file", 500));
+      return res.json(Utils.Response.error("Error uploading file", 409));
     }
   });
 };
