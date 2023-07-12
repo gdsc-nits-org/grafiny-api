@@ -1,3 +1,4 @@
 import uploadItems from "./uploadItems";
 import deleteFileByName from "./deleteItems";
-export { uploadItems, deleteFileByName };
+import deleteItemFolder from "./deleteItemFolder";
+export { uploadItems, deleteFileByName, deleteItemFolder };
