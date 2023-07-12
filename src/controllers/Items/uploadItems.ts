@@ -55,6 +55,7 @@ const handleUpload: RequestHandler = async (req: any, res: any) => {
       }
 
       const { name, topicId } = req.body as Interfaces.Item;
+      console.log(name, typeof name, topicId, typeof topicId);
       const existingItem = await Utils.prisma.items.findFirst({
         where: {
           AND: [{ name }, { topicId }],
@@ -72,7 +73,6 @@ const handleUpload: RequestHandler = async (req: any, res: any) => {
       //AWS Upload Function Starts Here
       const results = await Utils.Upload.s3Upload(req.files);
       console.log(results);
-      const fileUrls = results.map((result: any) => result.fileUrl);
       // AWS Upload Function Ends Here
       const newItem = await Utils.prisma.items.create({
         data: {
@@ -96,7 +96,7 @@ const handleUpload: RequestHandler = async (req: any, res: any) => {
         },
       });
 
-      return res.json(Utils.Response.success({ newItem, fileUrls }));
+      return res.json(Utils.Response.success({ newItem }));
     } catch (err) {
       console.log(err);
       return res.json(Utils.Response.error("Error uploading file", 409));
