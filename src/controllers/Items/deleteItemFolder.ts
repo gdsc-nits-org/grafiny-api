@@ -13,7 +13,22 @@ const deleteItemFolder: Interfaces.Controllers.Async = async (
       return res.json(Error.invalidDetails);
     }
 
-    const deletedItem = await Utils.prisma.items.delete({
+    const item = await Utils.prisma.items.findFirst({
+      where: {
+        id: itemId,
+      },
+      include: {
+        file: true,
+      },
+    });
+
+    if (!item) {
+      return res.json(Error.invalidDetails);
+    }
+
+    const keys = item.file.map((fileobj) => fileobj.key) as string[];
+    await Utils.Delete.deleteFiles(keys);
+    await Utils.prisma.items.delete({
       where: {
         id: itemId,
       },
@@ -21,7 +36,7 @@ const deleteItemFolder: Interfaces.Controllers.Async = async (
 
     return res.json(
       Utils.Response.success({
-        msg: deletedItem,
+        msg: "Item Folder Deleted Succesfully",
       })
     );
   } catch (err) {
