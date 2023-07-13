@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { isAuthenticated } from "src/middlewares";
-import { createProfile } from "src/controllers/Profile";
+import * as Controllers from "../controllers";
 
 const router: Router = Router();
 
-router.post("/create", isAuthenticated, createProfile);
+router.post("/create", isAuthenticated, Controllers.Profile.createProfile);
 
 export default router;
