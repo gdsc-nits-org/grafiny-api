@@ -25,8 +25,7 @@ const createDepartment: Interfaces.Controllers.Async = async (
 
     const existingDepartment = await Utils.prisma.department.findFirst({
       where: {
-        name: name,
-        instituteID: institute.id,
+        AND: [{ name }, { instituteID: institute.id }],
       },
     });
 

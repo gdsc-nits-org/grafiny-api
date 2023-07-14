@@ -21,8 +21,7 @@ const createTopic: Interfaces.Controllers.Async = async (req, res, next) => {
 
     const existingTopic = await Utils.prisma.topic.findFirst({
       where: {
-        name: name,
-        courseId: course.id,
+        AND: [{ name }, { courseId: course.id }],
       },
     });
 
