@@ -45,7 +45,7 @@ const handleUpload: RequestHandler = async (req: any, res: any) => {
         return res.json(Error.invalidDetails);
       }
 
-      if (!user.profile) {
+      if (!user?.profile?.id) {
         return res.json(
           Utils.Response.error(
             "Please Create A Profile First Before Uploading Any Files",
