@@ -1,12 +1,12 @@
 import * as Interfaces from "../../interfaces/index";
 import * as Utils from "../../utils/index";
-import { invalidDetails } from "src/globals/errors";
+import * as Error from "../../globals/errors/index";
 
 const getAllTopics: Interfaces.Controllers.Async = async (req, res, next) => {
   try {
     const courseId: string = req.query.id as string;
     if (!courseId) {
-      return res.json(invalidDetails);
+      return res.json(Error.invalidDetails);
     }
     const course = await Utils.prisma.course.findFirst({
       where: {
@@ -15,7 +15,7 @@ const getAllTopics: Interfaces.Controllers.Async = async (req, res, next) => {
     });
 
     if (!course) {
-      return res.json(invalidDetails);
+      return res.json(Error.invalidDetails);
     }
 
     const topics = await Utils.prisma.topic.findMany({

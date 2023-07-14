@@ -1,13 +1,13 @@
-import { invalidDetails } from "src/globals/errors";
 import * as Interfaces from "../../interfaces/index";
 import * as Utils from "../../utils/index";
+import * as Error from "../../globals/errors/index";
 
 const createTopic: Interfaces.Controllers.Async = async (req, res, next) => {
   try {
     const { name, id } = req.body as Interfaces.CourseAndTopic;
 
     if (!name || !id) {
-      return res.json(invalidDetails);
+      return res.json(Error.invalidDetails);
     }
     const course = await Utils.prisma.course.findFirst({
       where: {
@@ -16,7 +16,7 @@ const createTopic: Interfaces.Controllers.Async = async (req, res, next) => {
     });
 
     if (!course) {
-      return res.json(invalidDetails);
+      return res.json(Error.invalidDetails);
     }
 
     const existingTopic = await Utils.prisma.topic.findFirst({

@@ -1,6 +1,6 @@
-import { invalidDetails } from "src/globals/errors";
 import * as Interfaces from "../../interfaces/index";
 import * as Utils from "../../utils/index";
+import * as Error from "../../globals/errors/index";
 
 const deleteInstitute: Interfaces.Controllers.Async = async (
   req,
@@ -10,7 +10,7 @@ const deleteInstitute: Interfaces.Controllers.Async = async (
   try {
     const name: string = req.query.institutename as string;
     if (!name) {
-      return res.json(invalidDetails);
+      return res.json(Error.invalidDetails);
     }
     const deletedInstitute = await Utils.prisma.institution.delete({
       where: {

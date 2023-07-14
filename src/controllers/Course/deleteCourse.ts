@@ -1,12 +1,12 @@
 import * as Interfaces from "../../interfaces/index";
 import * as Utils from "../../utils/index";
-import { invalidDetails } from "src/globals/errors";
+import * as Error from "../../globals/errors/index";
 
 const deleteCourse: Interfaces.Controllers.Async = async (req, res, next) => {
   try {
     const id: string = req.query.id as string;
     if (!id) {
-      return res.json(invalidDetails);
+      return res.json(Error.invalidDetails);
     }
     const deletedCourse = await Utils.prisma.course.delete({
       where: {
