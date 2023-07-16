@@ -21,10 +21,54 @@ const searchItemsByName: Interfaces.Controllers.Async = async (
       },
       include: {
         file: true,
-        profile: true,
-        likedBy: true,
-        dislikedBy: true,
-        bookmarkedBy: true,
+        likedBy: {
+          select: {
+            id: true,
+            userId: true,
+            scholarId: true,
+          },
+        },
+        dislikedBy: {
+          select: {
+            id: true,
+            userId: true,
+            scholarId: true,
+          },
+        },
+        bookmarkedBy: {
+          select: {
+            id: true,
+            userId: true,
+            scholarId: true,
+          },
+        },
+        profile: {
+          select: {
+            id: true,
+            userId: true,
+            scholarId: true,
+          },
+        },
+        topic: {
+          select: {
+            name: true,
+            course: {
+              select: {
+                name: true,
+                department: {
+                  select: {
+                    name: true,
+                    institution: {
+                      select: {
+                        name: true,
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
       },
     });
 

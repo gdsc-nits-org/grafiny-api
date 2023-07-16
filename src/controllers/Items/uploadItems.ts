@@ -93,10 +93,60 @@ const handleUpload: RequestHandler = async (req: any, res: any) => {
         },
         include: {
           file: true,
+          likedBy: {
+            select: {
+              id: true,
+              userId: true,
+              scholarId: true,
+            },
+          },
+          dislikedBy: {
+            select: {
+              id: true,
+              userId: true,
+              scholarId: true,
+            },
+          },
+          bookmarkedBy: {
+            select: {
+              id: true,
+              userId: true,
+              scholarId: true,
+            },
+          },
+          profile: {
+            select: {
+              id: true,
+              userId: true,
+              scholarId: true,
+            },
+          },
+          topic: {
+            select: {
+              name: true,
+              course: {
+                select: {
+                  name: true,
+                  department: {
+                    select: {
+                      name: true,
+                      institution: {
+                        select: {
+                          name: true,
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
         },
       });
 
-      return res.json(Utils.Response.success({ newItem }));
+      return res.json(
+        Utils.Response.success({ newItem, msg: "Files Uploaded Successfull" })
+      );
     } catch (err) {
       console.log(err);
       return res.json(Utils.Response.error("Error uploading file", 409));

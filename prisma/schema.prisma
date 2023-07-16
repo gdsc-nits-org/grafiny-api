@@ -100,7 +100,7 @@ model File {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
   url     String @unique
   key     String @unique
-  file    Items  @relation(fields: [itemsId], references: [id], onDelete: Cascade)
+  item    Items  @relation(fields: [itemsId], references: [id], onDelete: Cascade)
   itemsId String @db.ObjectId
 }
 

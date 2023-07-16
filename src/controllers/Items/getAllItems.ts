@@ -7,10 +7,54 @@ const getAllItems: Interfaces.Controllers.Async = async (req, res, next) => {
       const items = await Utils.prisma.items.findMany({
         include: {
           file: true,
-          likedBy: true,
-          dislikedBy: true,
-          bookmarkedBy: true,
-          profile: true,
+          likedBy: {
+            select: {
+              id: true,
+              userId: true,
+              scholarId: true,
+            },
+          },
+          dislikedBy: {
+            select: {
+              id: true,
+              userId: true,
+              scholarId: true,
+            },
+          },
+          bookmarkedBy: {
+            select: {
+              id: true,
+              userId: true,
+              scholarId: true,
+            },
+          },
+          profile: {
+            select: {
+              id: true,
+              userId: true,
+              scholarId: true,
+            },
+          },
+          topic: {
+            select: {
+              name: true,
+              course: {
+                select: {
+                  name: true,
+                  department: {
+                    select: {
+                      name: true,
+                      institution: {
+                        select: {
+                          name: true,
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
         },
       });
       return res.json(
@@ -26,10 +70,54 @@ const getAllItems: Interfaces.Controllers.Async = async (req, res, next) => {
         },
         include: {
           file: true,
-          likedBy: true,
-          dislikedBy: true,
-          bookmarkedBy: true,
-          profile: true,
+          likedBy: {
+            select: {
+              id: true,
+              userId: true,
+              scholarId: true,
+            },
+          },
+          dislikedBy: {
+            select: {
+              id: true,
+              userId: true,
+              scholarId: true,
+            },
+          },
+          bookmarkedBy: {
+            select: {
+              id: true,
+              userId: true,
+              scholarId: true,
+            },
+          },
+          profile: {
+            select: {
+              id: true,
+              userId: true,
+              scholarId: true,
+            },
+          },
+          topic: {
+            select: {
+              name: true,
+              course: {
+                select: {
+                  name: true,
+                  department: {
+                    select: {
+                      name: true,
+                      institution: {
+                        select: {
+                          name: true,
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
         },
       });
 
