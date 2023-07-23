@@ -1,7 +1,7 @@
 import { RequestHandler } from "express";
 import * as Utils from "../../utils";
-import * as Interfaces from "../../interfaces/index";
-import * as Error from "../../globals/errors/index";
+import * as Interfaces from "../../interfaces";
+import * as Error from "../../globals/errors";
 import multer from "multer";
 const storage = multer.memoryStorage();
 
@@ -35,7 +35,7 @@ const handleUpload: RequestHandler = async (req: any, res: any) => {
 
       const user = await Utils.prisma.user.findFirst({
         where: {
-          id: req.user?.id,
+          id: req.user.id,
         },
         include: {
           profile: true,
@@ -45,7 +45,7 @@ const handleUpload: RequestHandler = async (req: any, res: any) => {
         return res.json(Error.invalidDetails);
       }
 
-      if (!user?.profile?.id) {
+      if (!user.profile) {
         return res.json(
           Utils.Response.error(
             "Please Create A Profile First Before Uploading Any Files",
@@ -55,10 +55,10 @@ const handleUpload: RequestHandler = async (req: any, res: any) => {
       }
 
       const { name, topicId } = req.body as Interfaces.Item;
-      console.log(name, typeof name, topicId, typeof topicId);
       const existingItem = await Utils.prisma.items.findFirst({
         where: {
-          AND: [{ name }, { topicId }],
+          name,
+          topicId,
         },
       });
 
@@ -72,7 +72,6 @@ const handleUpload: RequestHandler = async (req: any, res: any) => {
       }
       //AWS Upload Function Starts Here
       const results = await Utils.Upload.s3Upload(req.files);
-      console.log(results);
       // AWS Upload Function Ends Here
       const newItem = await Utils.prisma.items.create({
         data: {

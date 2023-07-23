@@ -1,5 +1,5 @@
-import * as Interfaces from "../../interfaces/index";
-import * as Utils from "../../utils/index";
+import * as Interfaces from "../../interfaces";
+import * as Utils from "../../utils";
 
 const getAllItems: Interfaces.Controllers.Async = async (req, res, next) => {
   try {

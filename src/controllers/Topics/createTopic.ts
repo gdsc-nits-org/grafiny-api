@@ -1,6 +1,6 @@
-import * as Interfaces from "../../interfaces/index";
-import * as Utils from "../../utils/index";
-import * as Error from "../../globals/errors/index";
+import * as Interfaces from "../../interfaces";
+import * as Utils from "../../utils";
+import * as Error from "../../globals/errors";
 
 const createTopic: Interfaces.Controllers.Async = async (req, res, next) => {
   try {
@@ -21,7 +21,8 @@ const createTopic: Interfaces.Controllers.Async = async (req, res, next) => {
 
     const existingTopic = await Utils.prisma.topic.findFirst({
       where: {
-        AND: [{ name }, { courseId: course.id }],
+        name,
+        courseId: course.id,
       },
     });
 

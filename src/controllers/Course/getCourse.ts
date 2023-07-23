@@ -1,6 +1,6 @@
-import * as Interfaces from "../../interfaces/index";
-import * as Utils from "../../utils/index";
-import * as Error from "../../globals/errors/index";
+import * as Interfaces from "../../interfaces";
+import * as Utils from "../../utils";
+import * as Error from "../../globals/errors";
 
 const getCourse: Interfaces.Controllers.Async = async (req, res, next) => {
   try {

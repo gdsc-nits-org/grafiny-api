@@ -1,6 +1,7 @@
-import * as Interfaces from "../../interfaces/index";
-import * as Utils from "../../utils/index";
-import * as Error from "../../globals/errors/index";
+import * as Interfaces from "../../interfaces";
+import * as Utils from "../../utils";
+import * as Error from "../../globals/errors";
+import { User } from "@prisma/client";
 
 const createProfile: Interfaces.Controllers.Async = async (req, res, next) => {
   try {
@@ -9,12 +10,10 @@ const createProfile: Interfaces.Controllers.Async = async (req, res, next) => {
     if (!scholarId || !year || !instituteId) {
       return res.json(Error.invalidDetails);
     }
+    const user = req.user as User;
     const existingProfile = await Utils.prisma.profile.findFirst({
       where: {
-        OR: [
-          { userId: req.user?.id },
-          { AND: [{ instituteId }, { scholarId }] },
-        ],
+        OR: [{ userId: user.id }, { instituteId, scholarId }],
       },
     });
 
@@ -34,7 +33,7 @@ const createProfile: Interfaces.Controllers.Async = async (req, res, next) => {
         profilePic: profilePic ? profilePic : "",
         user: {
           connect: {
-            id: req.user?.id,
+            id: user.id,
           },
         },
         institution: {

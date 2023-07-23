@@ -1,6 +1,6 @@
-import * as Interfaces from "../../interfaces/index";
-import * as Utils from "../../utils/index";
-import * as Error from "../../globals/errors/index";
+import * as Interfaces from "../../interfaces";
+import * as Utils from "../../utils";
+import * as Error from "../../globals/errors";
 
 const searchItemsByNameInTopic: Interfaces.Controllers.Async = async (
   req,
@@ -14,15 +14,11 @@ const searchItemsByNameInTopic: Interfaces.Controllers.Async = async (
     }
     const items = await Utils.prisma.items.findMany({
       where: {
-        AND: [
-          { topicId },
-          {
-            name: {
-              contains: name,
-              mode: "insensitive",
-            },
-          },
-        ],
+        topicId,
+        name: {
+          contains: name,
+          mode: "insensitive",
+        },
       },
       include: {
         file: true,
