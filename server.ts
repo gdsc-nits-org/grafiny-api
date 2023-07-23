@@ -52,6 +52,7 @@ app.use(`${Constants.System.ROOT}/department`, Routers.departmentRouter);
 app.use(`${Constants.System.ROOT}/course`, Routers.courseRouter);
 app.use(`${Constants.System.ROOT}/topic`, Routers.topicRouter);
 app.use(`${Constants.System.ROOT}/items`, Routers.itemsRouter);
+app.use(`${Constants.System.ROOT}/profile`, Routers.profileRouter);
 
 // Error Handlers
 app.use(Middlewares.Error.errorHandler);

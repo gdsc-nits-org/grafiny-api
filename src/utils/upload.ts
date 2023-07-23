@@ -24,9 +24,11 @@ export const s3Upload = async (files: Express.Multer.File[] | undefined) => {
     acl: "public-read",
   }));
 
-  return await Promise.all(
-    params.map((param: PutObjectCommandInput) =>
-      s3client.send(new PutObjectCommand(param))
-    )
-  );
+  const uploadPromises = params.map(async (param: PutObjectCommandInput) => {
+    await s3client.send(new PutObjectCommand(param));
+    const url = `https://${param.Bucket}.s3.amazonaws.com/${param.Key}`;
+    return { key: param.Key as string, url };
+  });
+
+  return await Promise.all(uploadPromises);
 };

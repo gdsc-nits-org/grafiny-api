@@ -1,6 +1,6 @@
-import * as Interfaces from "../../interfaces/index";
-import * as Utils from "../../utils/index";
-import { invalidDetails } from "src/globals/errors";
+import * as Interfaces from "../../interfaces";
+import * as Utils from "../../utils";
+import * as Error from "../../globals/errors";
 
 const createInstitute: Interfaces.Controllers.Async = async (
   req,
@@ -10,7 +10,7 @@ const createInstitute: Interfaces.Controllers.Async = async (
   try {
     const name: string = req.body.name;
     if (!name) {
-      return res.json(invalidDetails);
+      return res.json(Error.invalidDetails);
     }
 
     const existingInstitute = await Utils.prisma.institution.findFirst({

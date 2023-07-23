@@ -1,3 +1,12 @@
 import uploadItems from "./uploadItems";
-import deleteFileByName from "./deleteItems";
-export { uploadItems, deleteFileByName };
+import deleteItemFolder from "./deleteItemFolder";
+import searchItemsByName from "./searchItems";
+import searchItemsByNameInTopic from "./searchItemInTopic";
+import getAllItems from "./getAllItems";
+export {
+  uploadItems,
+  deleteItemFolder,
+  searchItemsByName,
+  searchItemsByNameInTopic,
+  getAllItems,
+};
