@@ -22,7 +22,8 @@ const createCourse: Interfaces.Controllers.Async = async (req, res, next) => {
 
     const existingCourse = await Utils.prisma.course.findFirst({
       where: {
-        AND: [{ name }, { departmentId: department.id }],
+        name,
+        departmentId: department.id,
       },
     });
 
