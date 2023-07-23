@@ -147,7 +147,6 @@ const handleUpload: RequestHandler = async (req: any, res: any) => {
         Utils.Response.success({ newItem, msg: "Files Uploaded Successfull" })
       );
     } catch (err) {
-      console.log(err);
       return res.json(Utils.Response.error("Error uploading file", 409));
     }
   });
