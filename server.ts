@@ -1,3 +1,4 @@
+import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
@@ -10,7 +11,7 @@ import * as Middlewares from "./src/middlewares";
 import * as Routers from "./src/routers";
 import * as Constants from "./src/globals/constants";
 import * as Utils from "./src/utils";
-
+dotenv.config();
 const app = express();
 
 // Middlewares
