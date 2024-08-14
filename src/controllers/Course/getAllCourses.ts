@@ -25,6 +25,9 @@ const getAllCourses: Interfaces.Controllers.Async = async (req, res, next) => {
       include: {
         topic: true,
       },
+      orderBy: {
+        name: "asc",
+      },
     });
 
     return res.json(

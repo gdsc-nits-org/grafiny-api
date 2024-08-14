@@ -26,11 +26,9 @@ app
       origin: [
         "http://localhost:3000",
         "http://127.0.0.1:3000",
-        "https://www.thunderclient.com",
         "https://dev--grafiny-nits.netlify.app",
         "https://grafiny-nits.netlify.app/",
-        "https://grafiny-client.vercel.app/",
-        "https://grafiny-client.vercel.app"
+        "https://grafiny-client.vercel.app",
       ],
       credentials: true,
       exposedHeaders: ["set-cookie"],

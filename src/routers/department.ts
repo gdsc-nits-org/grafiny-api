@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post(
   "/create",
-  Middlewares.checkAdmin,
+  Middlewares.isAuthenticated,
   Middlewares.checkAdmin,
   Controllers.Department.createDepartment
 );
