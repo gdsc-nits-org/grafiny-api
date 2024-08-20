@@ -29,6 +29,8 @@ app
         "https://dev--grafiny-nits.netlify.app",
         "https://grafiny-client.vercel.app",
         "https://main--grafiny-gdsc-nits.netlify.app",
+        "https://grafiny-gdsc-nits.netlify.app",
+        "https://grafiny-nits.netlify.app",
       ],
       credentials: true,
       exposedHeaders: ["set-cookie"],
